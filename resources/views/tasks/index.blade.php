@@ -12,6 +12,7 @@
                     <th>メッセージ</th>
                 </tr>
             </thead>
+            
             <tbody>
                 @foreach ($tasks as $task)
                 <tr>
@@ -28,10 +29,8 @@
 
             </tbody>
         </table>
-@endif
-
+ @endif
     {{-- タスク作成ページへのリンク --}}
     {!! link_to_route('tasks.create', '新規タスクの投稿', [], ['class' => 'btn btn-primary']) !!}
-
 
 @endsection

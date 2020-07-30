@@ -17,7 +17,7 @@ class TasksController extends Controller
     {
         $tasks = Task::all();
         
-        return nview('tasks.index',[
+        return view('tasks.index',[
             'tasks' => $tasks,
             ]);
     }
@@ -42,10 +42,15 @@ class TasksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     // 
-    // }
+    public function store(Request $request)
+    {
+        $task = new Task;
+        $task->content = $request->content;
+        $task->save();
+
+        // トップページへリダイレクトさせる
+        return redirect('/');
+    }
 
     /**
      * Display the specified resource.
@@ -86,7 +91,12 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+       
+        $task->content = $request->content;
+        $task->save();
+
+
     }
 
     /**
@@ -97,6 +107,10 @@ class TasksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        
+        $task->delete();
+
+        return redirect('/');
     }
 }
